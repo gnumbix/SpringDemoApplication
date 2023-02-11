@@ -1,0 +1,270 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: demo@example.com
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement:  true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: itemsQuantity
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: itemsSuspendedQuantity
+                  type: int
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: items
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement:  true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: productId
+                  type: int
+              - column:
+                  name: orderId
+                  type: int
+              - column:
+                  name: content
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement:  true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: itemsQuantity
+                  type: int
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: demo@example.com
+      changes:
+      - insert:
+          tableName: products
+          columns:
+            - column:
+                name: id
+                value: "1"
+            - column:
+                name: name
+                value: "One"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: itemsQuantity
+                value: "3"
+            - column:
+                name: itemsSuspendedQuantity
+                value: "0"
+      - insert:
+          tableName: products
+          columns:
+            - column:
+                name: id
+                value: "2"
+            - column:
+                name: name
+                value: "Two"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: itemsQuantity
+                value: "0"
+            - column:
+                name: itemsSuspendedQuantity
+                value: "0"
+      - insert:
+          tableName: products
+          columns:
+            - column:
+                name: id
+                value: "3"
+            - column:
+                name: name
+                value: "Three"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: itemsQuantity
+                value: "0"
+            - column:
+                name: itemsSuspendedQuantity
+                value: "0"
+
+      - sql:
+          sql: ALTER TABLE products ALTER COLUMN id RESTART WITH 4
+
+      - insert:
+          tableName: items
+          columns:
+            - column:
+                name: name
+                value: "One"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: productId
+                value: "1"
+            - column:
+                name: orderId
+                value: "0"
+            - column:
+                name: content
+                value: "Test 1"
+
+      - insert:
+          tableName: items
+          columns:
+            - column:
+                name: name
+                value: "Two"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: productId
+                value: "1"
+            - column:
+                name: orderId
+                value: "0"
+            - column:
+                name: content
+                value: "Test 2"
+
+      - insert:
+          tableName: items
+          columns:
+            - column:
+                name: name
+                value: "Three"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: productId
+                value: "1"
+            - column:
+                name: orderId
+                value: "0"
+            - column:
+                name: content
+                value: "Test 3"
+
+      - insert:
+          tableName: items
+          columns:
+            - column:
+                name: name
+                value: "Four"
+            - column:
+                name: status
+                value: "RESERVED"
+            - column:
+                name: productId
+                value: "1"
+            - column:
+                name: orderId
+                value: "1"
+            - column:
+                name: content
+                value: "Test 4"
+
+      - insert:
+          tableName: items
+          columns:
+            - column:
+                name: name
+                value: "Five"
+            - column:
+                name: status
+                value: "RESERVED"
+            - column:
+                name: productId
+                value: "1"
+            - column:
+                name: orderId
+                value: "1"
+            - column:
+                name: content
+                value: "Test 5"
+
+
+      - insert:
+          tableName: orders
+          columns:
+            - column:
+                name: id
+                value: "1"
+            - column:
+                name: name
+                value: "Some order"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: itemsQuantity
+                value: "2"
+
+      - sql:
+          sql: ALTER TABLE orders ALTER COLUMN id RESTART WITH 2

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head.html}"></head>
+<body>
+
+<header th:replace="~{fragments/header.html}"></header>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div th:replace="~{fragments/menu.html}"></div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Items</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <a type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/item/add/}">
+                        <span class="align-text-bottom"></span>
+                        Add Item
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Product Id</th>
+                        <th scope="col">Order Id</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${item_list}">
+                        <td th:text="${item.id}"></td>
+                        <td th:text="${item.status}"></td>
+                        <td><a th:href="'/item/update/' + ${item.id}+ '/'" th:text="${item.name}"></a></td>
+                        <td th:text="${item.getProductId()}"></td>
+                        <td th:text="${item.orderId}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer.html}"></div>
+
+</body>
+</html>

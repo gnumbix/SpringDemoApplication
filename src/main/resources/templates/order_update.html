@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head.html}"></head>
+<body>
+
+<header th:replace="~{fragments/header.html}"></header>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div th:replace="~{fragments/menu.html}"></div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2" th:text="${is_edit} ? 'Edit Order' : 'Add Order'"></h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <form action="#" th:action="(${is_edit}?'/order/update/':'/order/add/')" th:object="${form}" method="post">
+                    <input type="hidden" name="id" th:if="${is_edit}" th:value="${form.id}">
+                    <div class="form-group">
+                        <label for="inputStatus">Status</label>
+                        <select  th:class="(${#fields.hasErrors('status')}?'form-control form-select form-select-lg mb-3 is-invalid':'form-control form-select form-select-lg mb-3')" name="status" id="inputStatus"aria-describedby="statusHelp" th:field="*{status}">
+                            <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
+                        </select>
+                        <small id="statusHelp" class="invalid-feedback" th:if="${#fields.hasErrors('status')}" th:errors="*{name}">&nbsp;</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input type="text" th:class="(${#fields.hasErrors('name')}?'form-control is-invalid':'form-control')" name="name" id="inputName" aria-describedby="nameHelp" placeholder="Enter name" th:field="*{name}">
+                        <small id="nameHelp" class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">&nbsp;</small>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="form-group" th:if="${is_edit == false}">
+                        <label for="inputQty">Item qty</label>
+                        <input type="text" th:class="(${#fields.hasErrors('qty')}?'form-control is-invalid':'form-control')" name="qty" id="inputQty" aria-describedby="qtyHelp" placeholder="Quantity of item to order" th:field="*{qty}">
+                        <small id="qtyHelp" class="invalid-feedback" th:if="${#fields.hasErrors('qty')}" th:errors="*{qty}">&nbsp;</small>
+                    </div>
+                    <div>&nbsp;</div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer.html}"></div>
+
+</body>
+</html>
