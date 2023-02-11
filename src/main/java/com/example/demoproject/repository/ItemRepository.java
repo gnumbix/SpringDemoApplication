@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
-    List<Item> findAllByStatus(ItemStatus status, Pageable pageable);
+    List<Item> findAllByStatusAndProductId(ItemStatus status, Integer productId, Pageable pageable);
 
 }

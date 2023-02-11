@@ -28,6 +28,12 @@
                         <small id="statusHelp" class="invalid-feedback" th:if="${#fields.hasErrors('status')}" th:errors="*{name}">&nbsp;</small>
                     </div>
                     <div class="form-group">
+                        <label for="inputProductId">Product Id</label>
+                        <input type="text" th:class="(${#fields.hasErrors('productId')}?'form-control is-invalid':'form-control')" name="productId" id="inputProductId" aria-describedby="productIdHelp" placeholder="Enter productId" th:field="*{productId}">
+                        <small id="productIdHelp" class="invalid-feedback" th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}">&nbsp;</small>
+                    </div>
+                    <div>&nbsp;</div>
+                    <div class="form-group">
                         <label for="inputName">Name</label>
                         <input type="text" th:class="(${#fields.hasErrors('name')}?'form-control is-invalid':'form-control')" name="name" id="inputName" aria-describedby="nameHelp" placeholder="Enter name" th:field="*{name}">
                         <small id="nameHelp" class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">&nbsp;</small>

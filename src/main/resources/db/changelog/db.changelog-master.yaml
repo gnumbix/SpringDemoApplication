@@ -87,6 +87,9 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: productId
+                  type: int
+              - column:
                   name: itemsQuantity
                   type: int
                   constraints:
@@ -128,7 +131,7 @@ databaseChangeLog:
                 value: "ACTIVE"
             - column:
                 name: itemsQuantity
-                value: "0"
+                value: "3"
             - column:
                 name: itemsSuspendedQuantity
                 value: "0"
@@ -249,6 +252,54 @@ databaseChangeLog:
                 name: content
                 value: "Test 5"
 
+      - insert:
+          tableName: items
+          columns:
+            - column:
+                name: name
+                value: "Six"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: productId
+                value: "2"
+            - column:
+                name: content
+                value: "Test 6"
+
+      - insert:
+          tableName: items
+          columns:
+            - column:
+                name: name
+                value: "Seven"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: productId
+                value: "2"
+            - column:
+                name: content
+                value: "Test 7"
+
+      - insert:
+          tableName: items
+          columns:
+            - column:
+                name: name
+                value: "Eight"
+            - column:
+                name: status
+                value: "ACTIVE"
+            - column:
+                name: productId
+                value: "2"
+            - column:
+                name: content
+                value: "Test 8"
+
 
       - insert:
           tableName: orders
@@ -262,6 +313,9 @@ databaseChangeLog:
             - column:
                 name: status
                 value: "ACTIVE"
+            - column:
+                name: productId
+                value: "1"
             - column:
                 name: itemsQuantity
                 value: "2"

@@ -22,6 +22,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @Column(name="productId")
+    private Integer productId;
+
     @Column(name="itemsQuantity", nullable = false)
     private Integer itemsQuantity;
 
@@ -52,6 +55,14 @@ public class Order {
         this.status = status;
     }
 
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
     public Integer getItemsQuantity() {
         return itemsQuantity;
     }
@@ -73,11 +84,12 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && name.equals(order.name) && status == order.status && itemsQuantity.equals(order.itemsQuantity);
+        return Objects.equals(id, order.id) && name.equals(order.name) && status == order.status && productId.equals(order.productId) && itemsQuantity.equals(order.itemsQuantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, status, itemsQuantity);
+        return Objects.hash(id, name, status, productId, itemsQuantity);
     }
+
 }

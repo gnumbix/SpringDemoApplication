@@ -27,6 +27,7 @@
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Product id</th>
                         <th scope="col">Name</th>
                         <th scope="col">Items</th>
                     </tr>
@@ -35,6 +36,7 @@
                     <tr th:each="order : ${order_list}">
                         <td th:text="${order.id}"></td>
                         <td th:text="${order.status}"></td>
+                        <td th:text="${order.productId}"></td>
                         <td><a th:href="'/order/update/' + ${order.id}+ '/'" th:text="${order.name}"></a></td>
                         <td th:text="${order.itemsQuantity}"></td>
                     </tr>

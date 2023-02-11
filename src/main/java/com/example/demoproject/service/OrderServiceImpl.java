@@ -3,11 +3,13 @@ package com.example.demoproject.service;
 import com.example.demoproject.domain.Item;
 import com.example.demoproject.domain.Order;
 import com.example.demoproject.domain.enums.ItemStatus;
+import com.example.demoproject.exception.ProductNotFoundException;
 import com.example.demoproject.model.OrderForm;
 import com.example.demoproject.repository.ItemRepository;
 import com.example.demoproject.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demoproject.repository.ProductRepository;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,9 +23,12 @@ public class OrderServiceImpl implements OrderService {
 
     private final ItemRepository itemRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ItemRepository itemRepository) {
+    private final ProductRepository productRepository;
+
+    public OrderServiceImpl(OrderRepository orderRepository, ItemRepository itemRepository, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.itemRepository = itemRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -40,11 +45,17 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public Order add(OrderForm form) {
 
-        List<Item> itemsList = itemRepository.findAllByStatus(ItemStatus.ACTIVE, PageRequest.of(0, form.getQty()));
+        if(productRepository.findById(form.getProductId()).isEmpty()) {
+            throw new ProductNotFoundException(form.getProductId());
+        }
+
+        List<Item> itemsList = itemRepository.findAllByStatusAndProductId(
+                ItemStatus.ACTIVE, form.getProductId(), PageRequest.of(0, form.getQty()));
 
         Order order = new Order();
         order.setName(form.getName());
         order.setStatus(form.getStatus());
+        order.setProductId(form.getProductId());
         order.setItemsQuantity(itemsList.size());
         order = this.orderRepository.save(order);
 
@@ -67,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderOpt.get();
         order.setName(form.getName());
         order.setStatus(form.getStatus());
+        order.setProductId(form.getProductId());
         return order;
     }
 }

@@ -67,6 +67,7 @@ public class OrderController {
         form.setId(orderId);
         form.setStatus(order.getStatus());
         form.setName(order.getName());
+        form.setProductId(order.getProductId());
 
         model.addAttribute("statuses", OrderStatus.values());
         model.addAttribute("is_edit", true);

@@ -13,6 +13,9 @@ public class OrderForm {
     @Size(min=2, max=200, message = "Name to short")
     private String name;
 
+    @NotNull(message = "Product id cannot be null.")
+    private Integer productId;
+
     @NotNull(message = "Status cannot be null.")
     private OrderStatus status;
     private Integer qty;
@@ -41,6 +44,14 @@ public class OrderForm {
         this.status = status;
     }
 
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
     public Integer getQty() {
         return qty;
     }
@@ -55,6 +66,7 @@ public class OrderForm {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("status=" + status)
+                .add("productId=" + productId)
                 .add("qty=" + qty)
                 .toString();
     }
